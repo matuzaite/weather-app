@@ -48,11 +48,11 @@ const displayCurrentWeather = (weather) => {
     </tr>
     <tr>
     <td>Pressure</td>
-    <td id="pressure-w">${weather.current.pressure} hpa</td>
+    <td id="pressure-w">${weather.current.pressure}hpa</td>
     </tr>
     <tr>
     <td>Humidity</td>
-    <td >${weather.current.humidity} %</td>
+    <td >${weather.current.humidity}%</td>
     </tr>
     <tr>
     <td>Sunrise</td>
@@ -192,7 +192,7 @@ const displayHourlyWeather = (weather) => {
     weather.list[7].weather[0].description
   }</i> Humidity: ${weather.list[7].main.humidity}% ${
     weather.list[7].wind.speed
-  } m/s
+  }m/s
     </td>
   </tr>`;
 };
