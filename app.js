@@ -1,6 +1,17 @@
 const apiKey = `d9006e0a51462042590ac54b618a3f5f`;
 
+const loader = document.querySelector("#loader");
+
+const displayLoader = () => {
+  loader.classList.add("display");
+};
+
+const hideLoader = () => {
+  loader.classList.remove("display");
+};
+
 const getCurrentWeather = () => {
+  displayLoader();
   navigator.geolocation.getCurrentPosition((success) => {
     let lat = success.coords.latitude;
     let lon = success.coords.longitude;
@@ -10,6 +21,7 @@ const getCurrentWeather = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
+        hideLoader();
         displayCurrentWeather(data);
       });
   });
@@ -17,14 +29,16 @@ const getCurrentWeather = () => {
 
 const displayCurrentWeather = (weather) => {
   const currentWeatherContainer = document.querySelector(
-    ".current-w-container"
+    ".current-w-container-outter"
   );
 
-  const infoDiv = document.createElement("div");
+  const currentWeatherInfo = document.createElement("div");
 
-  currentWeatherContainer.appendChild(infoDiv);
+  currentWeatherInfo.classList.add("current-w-container");
 
-  infoDiv.innerHTML = `<h2>${weather.timezone}</h2>
+  currentWeatherContainer.appendChild(currentWeatherInfo);
+
+  currentWeatherInfo.innerHTML = `<h2>${weather.timezone}</h2>
   <img id='icon' src='http://openweathermap.org/img/wn/${
     weather.current.weather[0].icon
   }@2x.png' alt="weather-icon">
@@ -35,7 +49,7 @@ const displayCurrentWeather = (weather) => {
 
   const table = document.createElement("table");
 
-  currentWeatherContainer.appendChild(table);
+  currentWeatherInfo.appendChild(table);
 
   table.innerHTML = `
     <tr>
